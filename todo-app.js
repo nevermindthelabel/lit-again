@@ -8,9 +8,9 @@ class TodoApp extends LitElement {
   constructor() {
     super();
     this.todos = [
-      'Do thing 1',
-      'Do thing 2',
-      'Do thing 3'
+      { text: 'Do thing 1', finished: true },
+      { text: 'Do thing 2', finished: false },
+      { text: 'Do thing 3', finished: false }
     ];
   }
 
@@ -20,10 +20,9 @@ class TodoApp extends LitElement {
 
     <ol>
       ${this.todos.map(todo => html`
-        <li>${todo}</li>
+        <li>${todo.text}  (${todo.finished ? 'Completed' : 'Not Completed'})</li>
       `)}
     </ol>
-    ${this.todos}
     ${footerTemplate}
     `
   }
