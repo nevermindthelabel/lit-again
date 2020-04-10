@@ -1,4 +1,4 @@
-import { LitElement, html } from 'https://unpkg.com/lit-element?module';
+import { html, LitElement } from 'https://unpkg.com/lit-element?module';
 
 const author = 'open-wc.org';
 const homepage = 'https://open-wc.org';
@@ -21,6 +21,9 @@ class TodoApp extends LitElement {
   }
 
   render() {
+    const completedCount = this.todos.filter(e => e.finished).length;
+    const uncompletedCount = this.todos.length - completedCount;
+
     return html`
     <h1>Todo app with Lit Element and Lit HTML</h1>
 
@@ -38,6 +41,8 @@ class TodoApp extends LitElement {
         <button @click=${() => this._removeTodo(todo)}>❌</button></li>
       `)}
     </ol>
+    <div><h3>Completed todos: ${completedCount}</h3></div>
+    <div><h3>Uncompleted Todos: ${uncompletedCount}</h3></div>
     ${footerTemplate}
     `
   }
