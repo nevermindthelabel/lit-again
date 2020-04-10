@@ -54,8 +54,9 @@ class TodoApp extends LitElement {
     ];
   };
 
-  _removeTodo(item) {
-    this.todos = this.todos.filter(e => e !== item);
+  _removeTodo(e) {
+    this.todos = this.todos.filter(todo => todo !== e.detail);
+    console.log(e.detail);
   };
 
   _changeTodoFinished(e, updatedTodo) {
