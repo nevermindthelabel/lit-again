@@ -31,7 +31,11 @@ class TodoApp extends LitElement {
     <input id="addTodoInput" placeholder="Add todo..."/>
     <button @click="${this._addTodo}">Add</button>
 
-    <todo-list .todos=${this.todos}></todo-list>
+    <todo-list
+      .todos=${this.todos}
+      @change-todo-finished="${this._changeTodoFinished}"
+      @remove-todo="${this._removeTodo}"
+    ></todo-list>
 
     <div><h3>Completed todos: ${completedCount}</h3></div>
     <div><h3>Uncompleted Todos: ${uncompletedCount}</h3></div>
