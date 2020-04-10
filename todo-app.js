@@ -18,6 +18,9 @@ class TodoApp extends LitElement {
     return html`
     <h1>Todo app with Lit Element and Lit HTML</h1>
 
+    <input id="addTodoInput" placeholder="Add todo..."/>
+    <button @click="${this._addTodo}">Add</button>
+
     <ol>
       ${this.todos.map(todo => html`
         <li>${todo.text}  (${todo.finished ? 'Completed' : 'Not Completed'})</li>
@@ -25,6 +28,15 @@ class TodoApp extends LitElement {
     </ol>
     ${footerTemplate}
     `
+  }
+
+  _addTodo() {
+    const input = this.shadowRoot.getElementById('addTodoInput');
+    const text = input.value;
+    input.value = '';
+
+    this.todos.push({ text, finished: false });
+    this.requestUpdate();
   }
 }
 
