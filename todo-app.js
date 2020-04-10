@@ -1,4 +1,5 @@
 import { html, LitElement } from 'https://unpkg.com/lit-element?module';
+import './todoList.js';
 
 const author = 'open-wc.org';
 const homepage = 'https://open-wc.org';
@@ -30,17 +31,8 @@ class TodoApp extends LitElement {
     <input id="addTodoInput" placeholder="Add todo..."/>
     <button @click="${this._addTodo}">Add</button>
 
-    <ol>
-      ${this.todos.map(todo => html`
-        <li>
-          <input type="checkbox"
-          .checked=${todo.finished}
-          @change=${e => this._changeTodoFinished(e, todo)}
-        />
-        ${todo.text}
-        <button @click=${() => this._removeTodo(todo)}>❌</button></li>
-      `)}
-    </ol>
+    <todo-list .todos=${this.todos}></todo-list>
+
     <div><h3>Completed todos: ${completedCount}</h3></div>
     <div><h3>Uncompleted Todos: ${uncompletedCount}</h3></div>
     ${footerTemplate}
