@@ -29,7 +29,12 @@ class TodoApp extends LitElement {
 
     <ol>
       ${this.todos.map(todo => html`
-        <li>${todo.text}  (${todo.finished ? 'Completed' : 'Not Completed'})
+        <li>
+          <input type="checkbox"
+          .checked=${todo.finished}
+          @change=${e => this._changeTodoFinished(e, todo)}
+        />
+        ${todo.text}
         <button @click=${() => this._removeTodo(todo)}>❌</button></li>
       `)}
     </ol>
@@ -46,11 +51,22 @@ class TodoApp extends LitElement {
       ...this.todos,
       { text, finished: false }
     ];
-  }
+  };
 
   _removeTodo(item) {
     this.todos = this.todos.filter(e => e !== item);
-  }
+  };
+
+  _changeTodoFinished(e, updatedTodo) {
+    const finished = e.target.checked;
+    this.todos = this.todos.map(todo => {
+      if (todo !== updatedTodo) {
+        return todo;
+      } else {
+        return { ...updatedTodo, finished }
+      }
+    });
+  };
 }
 
 customElements.define('todo-app', TodoApp);
