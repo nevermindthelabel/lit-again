@@ -5,6 +5,12 @@ const homepage = 'https://open-wc.org';
 const footerTemplate = html`<footer>Made with 💗 by <a href="${homepage}">${author}</a></footer>`;
 
 class TodoApp extends LitElement {
+  static get properties() {
+    return {
+      todos: { type: Array }
+    }
+  }
+
   constructor() {
     super();
     this.todos = [
@@ -23,7 +29,8 @@ class TodoApp extends LitElement {
 
     <ol>
       ${this.todos.map(todo => html`
-        <li>${todo.text}  (${todo.finished ? 'Completed' : 'Not Completed'})</li>
+        <li>${todo.text}  (${todo.finished ? 'Completed' : 'Not Completed'})
+        <button @click=${() => this._removeTodo(todo)}>❌</button></li>
       `)}
     </ol>
     ${footerTemplate}
@@ -35,8 +42,14 @@ class TodoApp extends LitElement {
     const text = input.value;
     input.value = '';
 
-    this.todos.push({ text, finished: false });
-    this.requestUpdate();
+    this.todos = [
+      ...this.todos,
+      { text, finished: false }
+    ];
+  }
+
+  _removeTodo(item) {
+    this.todos = this.todos.filter(e => e !== item);
   }
 }
 
