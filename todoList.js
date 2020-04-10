@@ -10,6 +10,7 @@ class TodoList extends LitElement {
     if (!this.todos) {
       return html``;
     }
+
     return html`
       <ol>
         ${this.todos.map(todo => html`
@@ -27,7 +28,7 @@ class TodoList extends LitElement {
     `;
   }
   _changeTodoFinished(e, updatedTodo) {
-    const eventDetails = { updatedTodo, finished: e.target.checked};
+    const eventDetails = { updatedTodo, finished: e.target.checked };
     this.dispatchEvent(new CustomEvent('change-todo-finished', { detail: eventDetails }));
   }
   _removeTodo(item) {
