@@ -1,17 +1,23 @@
 import { LitElement, html } from 'https://unpkg.com/lit-element?module';
 
 const author = 'open-wc.org';
-const footerTemplate = html `<footer>Made with 💗 by <a href="https://open-wc.org">${author}</a></footer>`;
+const homepage = 'https://open-wc.org';
+const footerTemplate = html `<footer>Made with 💗 by <a href="${homepage}">${author}</a></footer>`;
 
 class TodoApp extends LitElement {
-  connectedCallback() {
-    super.connectedCallback();
-    console.log('Lit Element works');
+  constructor() {
+    super();
+    this.todos = [
+      'Do thing 1',
+      'Do thing 2',
+      'Do thing 3'
+    ];
   }
 
   render() {
     return html `
     <h1>Todo app with Lit Element and Lit HTML</h1>
+    ${this.todos}
     ${footerTemplate}
     `
   }
