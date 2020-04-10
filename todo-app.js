@@ -56,11 +56,11 @@ class TodoApp extends LitElement {
 
   _removeTodo(e) {
     this.todos = this.todos.filter(todo => todo !== e.detail);
-    console.log(e.detail);
   };
 
-  _changeTodoFinished(e, updatedTodo) {
-    const finished = e.target.checked;
+  _changeTodoFinished(e) {
+    const { updatedTodo, finished } = e.detail;
+
     this.todos = this.todos.map(todo => {
       if (todo !== updatedTodo) {
         return todo;
